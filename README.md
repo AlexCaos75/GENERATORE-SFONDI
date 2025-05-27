@@ -1,2 +1,0 @@
-# GENERATORE-SFONDI
-crea post
