@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Generatore Caos Completo</title>
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      text-align: center;
+    }
+    input, textarea, button {
+      width: 90%;
+      max-width: 700px;
+      margin: 10px auto;
+      display: block;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      background: #ff66cc;
+      color: white;
+      cursor: pointer;
+    }
+    pre {
+      background: #000;
+      padding: 15px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      text-align: left;
+    }
+    #anteprimaCaos {
+      margin-top: 30px;
+      border: 2px dashed #ff66cc;
+      padding: 20px;
+    }
+    @keyframes lampeggia {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+    .lampeggia {
+      animation: lampeggia 1s infinite;
+    }
+      @keyframes pulsante {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,255,255,0.6); }
+      50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(255,255,255,1); }
+    }
+    .pulsante {
+      animation: pulsante 1.5s infinite;
+    }
+</style>
+</head>
+<body>
+  <h1>🎨 Generatore Caos Completo</h1>
+  <input id="bgImage" placeholder="🖼 Link immagine sfondo o video mp4">
+  <input id="isVideo" type="checkbox"> Usa come sfondo video (MP4)
+  <input id="overlayImage" placeholder="🖼 Link immagine sovrapposta">
+  <input id="textContent" placeholder="📝 Testo lampeggiante">
+  <input id="textTop" placeholder="🔼 Top testo (es. 15%)">
+  <input id="textLeft" placeholder="🔽 Left testo (es. 50%)">
+  <input id="textColor" placeholder="🎨 Colore testo (es. white)">
+  <input id="textFont" placeholder="🔤 Font (es. Arial)">
+
+  <input id="btnText" placeholder="🔘 Testo bottone (es. Partecipa)">
+  <input id="btnLink" placeholder="🌐 Link bottone">
+  <input id="btnTop" placeholder="🔼 Top bottone">
+  <input id="btnLeft" placeholder="🔽 Left bottone">
+  <input id="btnColor" placeholder="🎨 Colore bottone">
+
+  <input id="btn2Text" placeholder="🔘 Testo secondo bottone">
+  <input id="btn2Link" placeholder="🌐 Link secondo bottone">
+  <input id="btn2Top" placeholder="🔼 Top secondo bottone">
+  <input id="btn2Left" placeholder="🔽 Left secondo bottone">
+  <input id="btn2Color" placeholder="🎨 Colore secondo bottone">
+
+  <input id="btn3Text" placeholder="🔘 Testo terzo bottone">
+  <input id="btn3Link" placeholder="🌐 Link terzo bottone">
+  <input id="btn3Top" placeholder="🔼 Top terzo bottone">
+  <input id="btn3Left" placeholder="🔽 Left terzo bottone">
+  <input id="btn3Color" placeholder="🎨 Colore terzo bottone">
+
+  <input id="audioBtnText" placeholder="🔊 Testo bottone musica (es. Avvia Musica)">
+  <input id="audioLink" placeholder="🎵 Link audio manuale (MP3 o MP4)">
+  <input id="audioBtnTop" placeholder="🔼 Top bottone musica">
+  <input id="audioBtnLeft" placeholder="🔽 Left bottone musica">
+
+  <input id="ytAuto" placeholder="🎥 Link YouTube autoplay invisibile">
+  <input id="mp3Auto" placeholder="🎧 Link MP3 autoplay invisibile">
+  <input id="mp4Auto" placeholder="🎞️ Link MP4 autoplay invisibile">
+
+  <input id="widthBox" placeholder="📏 Larghezza sfondo (es. 700px o 100%)">
+  <input id="heightBox" placeholder="📐 Altezza sfondo (es. 700px o auto)">
+  <input id="boxBgColor" placeholder="🎨 Colore sfondo (es. black, #000)">
+  <input id="boxRadius" placeholder="🎯 Raggio angoli (es. 10px o 0 per quadrato)">
+
+  <button onclick="generaCaos()">🔮 Genera</button>
+  <button onclick="copiaCodice()">📋 Copia Codice</button>
+  <button onclick="scaricaCodice()">💾 Download HTML</button>
+  <button onclick="copiaSoloDiv()">📋 Copia solo codice per bacheca</button>
+  <pre id="output"></pre>
+  <div id="anteprimaCaos"></div>
+
+  <script>
+    function generaCaos() {
+      const get = id => document.getElementById(id)?.value?.trim() || '';
+      const bg = get('bgImage');
+      const isVideo = document.getElementById('isVideo')?.checked;
+      const overlay = get('overlayImage');
+      const text = get('textContent');
+      const textTop = get('textTop') || '15%';
+      const textLeft = get('textLeft') || '50%';
+      const textColor = get('textColor') || 'white';
+      const textFont = get('textFont') || 'Arial';
+
+      const btnText = get('btnText');
+      const btnLink = get('btnLink');
+      const btnTop = get('btnTop') || '85%';
+      const btnLeft = get('btnLeft') || '50%';
+      const btnColor = get('btnColor') || '#ff00ff';
+
+      const btn2Text = get('btn2Text');
+      const btn2Link = get('btn2Link');
+      const btn2Top = get('btn2Top') || '90%';
+      const btn2Left = get('btn2Left') || '50%';
+      const btn2Color = get('btn2Color') || '#00ffff';
+
+      const btn3Text = get('btn3Text');
+      const btn3Link = get('btn3Link');
+      const btn3Top = get('btn3Top') || '95%';
+      const btn3Left = get('btn3Left') || '50%';
+      const btn3Color = get('btn3Color') || '#00ccff';
+
+      const audioBtnText = get('audioBtnText');
+      const audioLink = get('audioLink');
+      const audioTop = get('audioBtnTop') || '93%';
+      const audioLeft = get('audioBtnLeft') || '50%';
+
+      const yt = get('ytAuto');
+      const mp3 = get('mp3Auto');
+      const mp4 = get('mp4Auto');
+
+      const width = get('widthBox') || '700px';
+      const height = get('heightBox') || '700px';
+      const boxBgColor = get('boxBgColor') || 'black';
+      const boxRadius = get('boxRadius') || '10px';
+
+      let sfondo = '';
+      if (isVideo && bg) {
+        sfondo = `<video autoplay loop muted playsinline style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;"><source src="${bg}" type="video/mp4"></video>`;
+      } else if (bg) {
+        sfondo = `<img src="${bg}" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;">`;
+      }
+
+      const sovrapposta = overlay ? `<img src="${overlay}" style="position:absolute;top:50%;left:50%;width:100%;height:100%;transform:translate(-50%,-50%);z-index:1;">` : '';
+      const testo = text ? `<div class="lampeggia" style="position:absolute;top:${textTop};left:${textLeft};transform:translate(-50%, -50%);font-size: 24px;color:${textColor};font-family:${textFont};z-index:2;font-weight:bold;">${text}</div>` : '';
+      const bottone = btnText && btnLink ? `<a href="${btnLink}" target="_blank" style="position:absolute;top:${btnTop};left:${btnLeft};transform:translate(-50%, -50%);background:${btnColor};color:white;padding:10px 20px;border-radius:10px;z-index:3;text-decoration:none;font-weight:bold;" class="pulsante">${btnText}</a>` : '';
+      const bottone2 = btn2Text && btn2Link ? `<a href="${btn2Link}" target="_blank" style="position:absolute;top:${btn2Top};left:${btn2Left};transform:translate(-50%, -50%);background:${btn2Color};color:white;padding:10px 20px;border-radius:10px;z-index:3;text-decoration:none;font-weight:bold;" class="pulsante">${btn2Text}</a>` : '';
+      const bottone3 = btn3Text && btn3Link ? `<a href="${btn3Link}" target="_blank" style="position:absolute;top:${btn3Top};left:${btn3Left};transform:translate(-50%, -50%);background:${btn3Color};color:white;padding:10px 20px;border-radius:10px;z-index:3;text-decoration:none;font-weight:bold;" class="pulsante">${btn3Text}</a>` : '';
+      const bottoneAudio = audioBtnText && audioLink ? `<button onclick=\"document.getElementById('manualAudio').play()\" style=\"position:absolute;top:${audioTop};left:${audioLeft};transform:translate(-50%, -50%);background:#00ccff;color:white;padding:10px 20px;border:none;border-radius:10px;z-index:4;\">${audioBtnText}</button><audio id='manualAudio' style='display:none'><source src='${audioLink}'></audio>` : '';
+
+      let media = '';
+      if (yt) {
+        const id = yt.includes("youtu.be/") ? yt.split("youtu.be/")[1] : yt.split("v=")[1]?.split("&")[0];
+        if (id) media += `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&loop=1&playlist=${id}" style="width:1px;height:1px;opacity:0;position:absolute;"></iframe>`;
+      }
+      if (mp3) media += `<audio autoplay loop style="display:none;"><source src="${mp3}" type="audio/mpeg"></audio>`;
+      if (mp4) media += `<video autoplay loop muted playsinline style="display:none;"><source src="${mp4}" type="video/mp4"></video>`;
+
+      const anteprimaHTML = `
+        <div style="width:${width};height:${height};position:relative;overflow:hidden;background:${boxBgColor};border:3px solid ${btnColor};border-radius:${boxRadius};box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);padding: 20px;box-sizing: border-box;">
+          ${sfondo}
+          ${sovrapposta}
+          ${testo}
+          ${bottone}
+          ${bottone2}
+          ${bottone3}
+          ${bottoneAudio}
+          ${media}
+        </div>
+        <style>@keyframes lampeggia { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }</style>`;
+
+      document.getElementById('output').textContent = anteprimaHTML;
+      document.getElementById('anteprimaCaos').innerHTML = anteprimaHTML;
+    }
+
+    function copiaCodice() {
+      navigator.clipboard.writeText(document.getElementById('output').textContent).then(() => alert("Codice copiato!"));
+    }
+
+    function scaricaCodice() {
+      const blob = new Blob([document.getElementById('output').textContent], { type: 'text/html' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'evento-caos.html';
+      link.click();
+    }
+
+    function copiaSoloDiv() {
+      const fullCode = document.getElementById('output').textContent;
+      const divOnly = fullCode.split('<style>')[0].trim();
+      navigator.clipboard.writeText(divOnly).then(() => alert("Solo il blocco <div> è stato copiato per la bacheca!"));
+    }
+  </script>
+</body>
+</html>
